@@ -10,14 +10,57 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
 
-
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
+inquirer
+  .prompt([
+    {
+      type: "input",
+      message: "What is your name?",
+      name: "name",
+    },
+    {
+      type: "number",
+      message: "Enter the employee ID?",
+      name: "id",
+    },
+    {
+      type: "input",
+      message: "Enter the email?",
+      name: "email",
+    },
+    {
+      type: "list",
+      message: "Select a role",
+      name: "role",
+      choices: ["Engineer", "Intern", "Manager"],
+    },
+    {
+      type: "number",
+      message: "What is your office number",
+      name: "officeNumber",
+      when: (answers) => answers.role === "Manager",
+    },
+    {
+      type: "input",
+      message: "What is the Enginner's Github username?",
+      name: "github",
+      when: (answers) => answers.role === "Engineer",
+    },
+    {
+      type: "input",
+      message: "What is the intern's school?",
+      name: "school",
+      when: (answers) => answers.role === "Intern",
+    },
+  ])
 
-// After the user has input all employees desired, call the `render` function (required
-// above) and pass in an array containing all employee objects; the `render` function will
-// generate and return a block of HTML including templated divs for each employee!
-
+  // After the user has input all employees desired, call the `render` function (required
+  // above) and pass in an array containing all employee objects; the `render` function will
+  // generate and return a block of HTML including templated divs for each employee!
+  .then((answers) => {
+    console.log(answers);
+  });
 // After you have your html, you're now ready to create an HTML file using the HTML
 // returned from the `render` function. Now write it to a file named `team.html` in the
 // `output` folder. You can use the variable `outputPath` above target this location.
