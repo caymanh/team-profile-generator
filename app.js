@@ -34,7 +34,7 @@ const managerQn = [
   {
     type: "number",
     message: "Enter the manager's office number",
-    name: "officeNum",
+    name: "officeNumber",
   },
   {
     type: "list",
@@ -59,25 +59,25 @@ const teamQn = [
   },
   {
     type: "number",
-    message: "Enter the person's ID.",
+    message: "Enter the person's ID",
     name: "id",
   },
   {
     type: "input",
-    message: "Enter the person's email.",
+    message: "Enter the person's email",
     name: "email",
   },
   {
     type: "input",
-    message: "What is the enginner's Github username?",
+    message: "Enter the enginner's Github username",
     name: "github",
-    when: (answers) => answers.role === "Engineer",
+    when: (teamData) => teamData.role === "Engineer",
   },
   {
     type: "input",
-    message: "What is the intern's school?",
+    message: "Enter the intern's school",
     name: "school",
-    when: (answers) => answers.role === "Intern",
+    when: (teamData) => teamData.role === "Intern",
   },
   {
     type: "list",
@@ -89,28 +89,31 @@ const teamQn = [
 
 //Function to add team members
 const addMember = () => {
+  let newMember;
   inquirer.prompt(teamQn).then((teamData) => {
-    if (teamData.role === "Engineer") {
-      let newMember = new Engineer(
+    if (teamData.role == "Engineer") {
+      newMember = new Engineer(
         teamData.name,
         teamData.id,
         teamData.email,
         teamData.github
       );
-      teamProfile.push(newMember);
     } else {
-      let newMember = new Intern(
+      newMember = new Intern(
         teamData.name,
         teamData.id,
         teamData.email,
         teamData.school
       );
-      teamProfile.push(newMember);
     }
+    teamProfile.push(newMember);
+
     if (teamData.addAnother === "Yes") {
-        addMember();
+      addMember();
     } else {
-        generatePage();
+      fs.writeFile(outputPath, render(teamProfile), (err) =>
+        err ? console.log(err) : console.log("Success!")
+      );
     }
   });
 };
@@ -122,13 +125,15 @@ const init = () => {
       managerData.name,
       managerData.id,
       managerData.email,
-      managerData.officeNum
+      managerData.officeNumber
     );
     teamProfile.push(managerProfile);
-    if (managerData.addAnother === "Yes") {
+    if (managerData.addTeam == "Yes") {
       addMember();
     } else {
-      generatePage();
+      fs.writeFile(outputPath, render(teamProfile), (err) =>
+        err ? console.log(err) : console.log("Success!")
+      );
     }
   });
 };
@@ -138,7 +143,7 @@ init();
 
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
-// generate and return a block of HTML inclu  ding templated divs for each employee!
+// generate and return a block of HTML including templated divs for each employee!
 
 // After you have your html, you're now ready to create an HTML file using the HTML
 // returned from the `render` function. Now write it to a file named `team.html` in the
