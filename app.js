@@ -88,6 +88,27 @@ const teamQn = [
 ];
 
 
+//Function to initialize program
+const init = () => {
+  inquirer.prompt(managerQn).then((managerData) => {
+    let managerProfile = new Manager(
+      managerData.name,
+      id,
+      managerData.email,
+      managerData.officeNum
+    );
+    teamProfile.push(managerProfile);
+    if (managerData.addAnother === "Yes") {
+      addMember();
+    } else {
+      generatePage();
+    }
+  });
+};
+
+//Function call to initialize program
+init();
+
 
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
