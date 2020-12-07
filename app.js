@@ -87,13 +87,40 @@ const teamQn = [
   },
 ];
 
+//Function to add team members
+const addMember = () => {
+  inquirer.prompt(teamQn).then((teamData) => {
+    if (teamData.role === "Engineer") {
+      let newMember = new Engineer(
+        teamData.name,
+        teamData.id,
+        teamData.email,
+        teamData.github
+      );
+      teamProfile.push(newMember);
+    } else {
+      let newMember = new Intern(
+        teamData.name,
+        teamData.id,
+        teamData.email,
+        teamData.school
+      );
+      teamProfile.push(newMember);
+    }
+    if (teamData.addAnother === "Yes") {
+        addMember();
+    } else {
+        generatePage();
+    }
+  });
+};
 
 //Function to initialize program
 const init = () => {
   inquirer.prompt(managerQn).then((managerData) => {
     let managerProfile = new Manager(
       managerData.name,
-      id,
+      managerData.id,
       managerData.email,
       managerData.officeNum
     );
@@ -108,7 +135,6 @@ const init = () => {
 
 //Function call to initialize program
 init();
-
 
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
