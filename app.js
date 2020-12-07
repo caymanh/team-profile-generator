@@ -19,21 +19,45 @@ const managerQn = [
     type: "input",
     message: "Enter the name of the manager",
     name: "name",
+    validate: async (input) => {
+      if (input == "") {
+        return "Please enter a name";
+      }
+      return true;
+    },
   },
   {
     type: "number",
     message: "Enter the manager's ID",
     name: "id",
+    validate: async (input) => {
+      if (isNaN(input)) {
+        return "Please enter a number";
+      }
+      return true;
+    },
   },
   {
     type: "input",
     message: "Enter the manager's email",
     name: "email",
+    validate: async (input) => {
+        if (input == "") {
+          return "Please enter an email";
+        }
+        return true;
+      },
   },
   {
     type: "number",
     message: "Enter the manager's office number",
     name: "officeNumber",
+    validate: async (input) => {
+        if (isNaN(input)) {
+          return "Please enter a number";
+        }
+        return true;
+      },
   },
   {
     type: "list",
@@ -55,28 +79,58 @@ const teamQn = [
     type: "input",
     message: "Enter the name of the person holding this position",
     name: "name",
+    validate: async (input) => {
+        if (input == "") {
+          return "Please enter a name";
+        }
+        return true;
+      },
   },
   {
     type: "number",
     message: "Enter the person's ID",
     name: "id",
+    validate: async (input) => {
+        if (isNaN(input)) {
+          return "Please enter a number";
+        }
+        return true;
+      },
   },
   {
     type: "input",
     message: "Enter the person's email",
     name: "email",
+    validate: async (input) => {
+        if (input == "") {
+          return "Please enter an email";
+        }
+        return true;
+      },
   },
   {
     type: "input",
     message: "Enter the enginner's Github username",
     name: "github",
     when: (teamData) => teamData.role === "Engineer",
+    validate: async (input) => {
+        if (input == "") {
+          return "Please enter a username";
+        }
+        return true;
+      },
   },
   {
     type: "input",
-    message: "Enter the intern's school",
+    message: "Enter the intern's school name",
     name: "school",
     when: (teamData) => teamData.role === "Intern",
+    validate: async (input) => {
+        if (input == "") {
+          return "Please enter a school name";
+        }
+        return true;
+      },
   },
   {
     type: "list",
