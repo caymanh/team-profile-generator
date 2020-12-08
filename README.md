@@ -20,7 +20,7 @@
 
  ### Description
  
- Team Profile Generator is a Node CLI that takes in information about employees in a software engineering team and generates an HTML webpage that displays summaries for each person. The application will prompt the user for information about the team manager and then information about the team members. The user can input any number of team members, and they may be a mix of engineers and interns. When the user has completed building the team, the application will create an HTML file that displays a nicely formatted team roster based on the information provided by the user.
+ Team Profile Generator is a Node CLI that uses the [Inquirer package](https://www.npmjs.com/package/inquirer) to take in information about employees in a software engineering team and generates an HTML webpage that displays summaries for each person. The application will prompt the user for information about the team manager and then information about the team members. The user can input any number of team members from a user's input, and they may be a mix of engineers and interns. When the user has completed building the team, the application will create an HTML file that displays a nicely formatted team roster based on the information provided by the user.
 
  <p align="center">
   <img alt="Screenshot of Team Profile Generated" src="https://github.com/caymanh/team-profile-generator/blob/main/image/team-profile-generator-screenshot.JPG">
